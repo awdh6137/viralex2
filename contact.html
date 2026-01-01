@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا | Viralex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #041624;
+            --neon-g: #89cf53;
+            --neon-c: #2ab2d1;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Cairo', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* الخلفية الموحدة مع الصفحة الرئيسية */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(rgba(42, 178, 209, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(42, 178, 209, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* الملاحة */
+        nav {
+            height: 80px; display: flex; justify-content: space-between; align-items: center;
+            padding: 0 8%; background: rgba(5, 22, 34, 0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000;
+        }
+        .main-logo { height: 45px; }
+
+        /* حاوية الاتصال الرئيسية */
+        .contact-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* القسم الأيمن: معلومات التواصل */
+        .contact-info h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .contact-info h1 span { color: var(--neon-g); }
+        .contact-info p { color: #aaa; font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; }
+
+        .contact-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: 0.4s;
+        }
+        .contact-card:hover {
+            border-color: var(--neon-c);
+            transform: translateX(-10px);
+            background: rgba(255,255,255,0.06);
+        }
+        .icon-box {
+            width: 50px; height: 50px;
+            background: rgba(42, 178, 209, 0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon-c); font-size: 1.5rem;
+        }
+
+        /* القسم الأيسر: نموذج الإرسال */
+        .contact-form-wrap {
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 35px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .contact-form-wrap::before {
+            content: ""; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-g), transparent, var(--neon-c));
+            border-radius: 35px; z-index: -1; opacity: 0.2;
+        }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; color: var(--neon-g); margin-bottom: 10px; font-weight: 600; font-size: 0.9rem; }
+        
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Cairo';
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--neon-c);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(42, 178, 209, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--neon-g);
+            color: var(--bg);
+            border: none;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(137, 207, 83, 0.3);
+        }
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(137, 207, 83, 0.5);
+        }
+
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .contact-container { grid-template-columns: 1fr; text-align: center; margin-top: 30px; }
+            .contact-card { justify-content: center; transform: none !important; }
+            .contact-form-wrap { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+
+    <nav>
+        <a href="index.html">
+            <img src="logo-head1.png" alt="Viralex" class="main-logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: #fff; font-weight: 600;">← العودة للرئيسية</a>
+        </div>
+    </nav>
+
+    <main class="contact-container">
+        
+        <div class="contact-info">
+            <h1>لنتحدث عن <span>مشروعك</span> القادم</h1>
+            <p>سواء كنت تبحث عن استشارة بصرية أو ترغب في بناء هوية رقمية كاملة، فريق فيراليكس جاهز لتحويل رؤيتك إلى واقع ملموس.</p>
+            
+            <div class="contact-card">
+                <div class="icon-box">📍</div>
+                <div>
+                    <h4 style="color: var(--neon-c);">المقر الرقمي</h4>
+                    <p style="font-size: 0.9rem;">المنطقة الإبداعية، برج فيراليكس، الطابق 24</p>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-box">✉️</div>
+                <div>
+                    <h4 style="color: var(--neon-c);">البريد الإلكتروني</h4>
+                    <p style="font-size: 0.9rem;">projects@viralex.com</p>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-box">📱</div>
+                <div>
+                    <h4 style="color: var(--neon-c);">تواصل مباشر</h4>
+                    <p style="font-size: 0.9rem;" dir="ltr">+966 500 000 000</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-wrap">
+            <form action="#">
+                <div class="form-group">
+                    <label>اسمك الكامل</label>
+                    <input type="text" class="input-field" placeholder="مثال: أحمد محمد">
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" class="input-field" placeholder="name@company.com">
+                </div>
+
+                <div class="form-group">
+                    <label>نوع الخدمة</label>
+                    <select class="input-field" style="appearance: none;">
+                        <option>تطوير هوية بصرية</option>
+                        <option>تصميم موقع إلكتروني</option>
+                        <option>استراتيجية براندينج</option>
+                        <option>أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>تفاصيل المشروع</label>
+                    <textarea class="input-field" rows="5" placeholder="أخبرنا باختصار عن فكرتك..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">إرسال الطلب الآن</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer style="text-align: center; padding: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid var(--glass-border);">
+        © 2026 Viralex Design Hub. كل الحقوق محفوظة.
+    </footer>
+
+</body>
+</html>

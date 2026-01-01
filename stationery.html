@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viralex | تطبيقات الهوية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030b11;
+            --neon-g: #89cf53;
+            --neon-c: #2ab2d1;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* الهيدر */
+        .page-header {
+            padding: 80px 8% 40px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(137, 207, 83, 0.05), transparent);
+        }
+        .page-header h1 { font-size: 3rem; font-weight: 900; color: var(--neon-g); margin-bottom: 15px; }
+        .page-header p { color: #aaa; max-width: 700px; margin: auto; font-size: 1.1rem; }
+
+        /* أزرار الفلترة */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            padding: 0 8%;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.4s;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        .filter-btn:hover { border-color: var(--neon-c); }
+        .filter-btn.active {
+            background: var(--neon-g);
+            color: var(--bg);
+            border-color: var(--neon-g);
+            box-shadow: 0 0 20px rgba(137, 207, 83, 0.3);
+        }
+
+        /* الشبكة الاحترافية */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 8% 80px;
+            min-height: 400px; /* لضمان عدم قفز الصفحة عند الفلترة */
+        }
+
+        /* بطاقة العمل */
+        .portfolio-item {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* تأثير الطبقة الشفافة */
+        .item-overlay {
+            position: absolute;
+            top: -14px; left: -47px; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(3,11,17,0.95), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 35px;
+            opacity: 0;
+            transition: 0.4s ease;
+            transform: translateY(15px);
+        }
+
+        .portfolio-item:hover {
+            border-color: var(--neon-c);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item:hover .item-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .item-overlay h3 { color: var(--neon-g); margin-bottom: 8px; font-size: 1.5rem; font-weight: 700; }
+        .item-overlay p { font-size: 0.95rem; color: #ccc; margin: 0; font-weight: 300; }
+
+        /* زر العودة */
+        .back-nav { text-align: center; padding: 40px 0 100px; }
+        .btn-back { 
+            padding: 15px 50px; border: 2px solid var(--neon-g); 
+            color: var(--neon-g); text-decoration: none; border-radius: 50px;
+            transition: 0.4s; font-weight: bold;
+        }
+        .btn-back:hover { background: var(--neon-g); color: #fff; box-shadow: 0 0 25px rgba(42, 178, 209, 0.4); }
+
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2.2rem; }
+            .portfolio-item { aspect-ratio: 16 / 9; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>تطبيقات الهوية</h1>
+        <p>تجسيد حي لهوية Viralex البصرية عبر مختلف المنصات والوسائط الفيزيائية والرقمية.</p>
+    </header>
+
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="print">مطبوعات</button>
+        <button class="filter-btn" data-filter="digital">رقمي</button>
+        <button class="filter-btn" data-filter="gifts">هدايا</button>
+    </div>
+
+    <main class="gallery-grid" id="portfolio-grid">
+        
+        <div class="portfolio-item print">
+            <img src="8.jpg" alt="Business Card">
+            <div class="item-overlay">
+                <h3>بطاقة الأعمال</h3>
+                <p>مطبوعات ورقية فاخرة</p>
+            </div>
+        </div>
+
+
+
+
+
+<div class="portfolio-item gifts">
+            <img src="24.jpg" alt="Business Card">
+            <div class="item-overlay">
+                <h3>غلاف تلفون</h3>
+                <p>مطبوعات ورقية فاخرة</p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        
+
+        <div class="portfolio-item print">
+            <img src="9.jpg" alt="Letterhead">
+            <div class="item-overlay">
+                <h3>ورق المراسلات الرسمية</h3>
+                <p>مطبوعات الشركات</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item digital">
+            <img src="10.jpg" alt="App UI">
+            <div class="item-overlay">
+                <h3>واجهة تطبيق الموبايل</h3>
+                <p>تجربة مستخدم رقمية</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item gifts">
+            <img src="11.jpg" alt="Bags">
+            <div class="item-overlay">
+                <h3>حقائب دعائية</h3>
+                <p>هدايا ترويجية</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item digital">
+            <img src="12.jpg" alt="Social Media">
+            <div class="item-overlay">
+                <h3>قوالب السوشيال ميديا</h3>
+                <p>محتوى رقمي متناسق</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item gifts">
+            <img src="13.jpg" alt="ID Card">
+            <div class="item-overlay">
+                <h3>بطاقة الموظف التعريفية</h3>
+                <p>هوية الفريق الداخلية</p>
+            </div>
+        </div>
+
+    </main>
+
+    <nav class="back-nav">
+        <a href="index.html" class="btn-back">← العودة للرئيسية</a>
+    </nav>
+
+    <footer style="text-align: center; padding: 40px; color: #444; border-top: 1px solid var(--border);">
+        © 2026 Viralex Digital Lab | All Rights Reserved.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 1. تحديث الأزرار
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // 2. الحصول على الفلتر المختار
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // 3. تطبيق الأنيميشن والفلترة
+                    portfolioItems.forEach(item => {
+                        // تأثير الاختفاء أولاً
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.9)';
+
+                        setTimeout(() => {
+                            if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                                item.style.display = 'block';
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'scale(1)';
+                                }, 50);
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
