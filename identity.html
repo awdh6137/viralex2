@@ -17,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--bg); color: #fff; font-family: 'Cairo', sans-serif; overflow-x: hidden; }
 
-        /* الهيدر السينمائي */
+        /* الهيدر */
         .identity-hero {
             height: 60vh;
             display: flex;
@@ -38,7 +38,6 @@
             align-items: center;
             padding: 80px 10%;
             gap: 50px;
-            cursor: pointer; /* جعل القسم يوحي بأنه قابل للضغط */
             transition: 0.3s;
         }
         .info-section:hover { background: rgba(255,255,255,0.02); }
@@ -50,8 +49,29 @@
             letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; display: block;
         }
         .info-text h2 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 800; line-height: 1.3; }
-        .info-text h2 span { color: var(--neon-g); }
         .info-text p { font-size: 1.15rem; color: #ccc; line-height: 1.8; margin-bottom: 30px; }
+
+        /* تصميم البوتن (الزر) الجديد */
+        .btn-details {
+            display: inline-block;
+            padding: 12px 35px;
+            background: transparent;
+            color: var(--neon-c);
+            border: 2px solid var(--neon-c);
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        .btn-details:hover {
+            background: var(--neon-c);
+            color: var(--bg);
+            box-shadow: 0 0 20px var(--neon-c);
+            transform: translateY(-3px);
+        }
 
         .info-visual { flex: 1; display: flex; justify-content: center; position: relative; }
         .visual-card {
@@ -62,13 +82,13 @@
         }
         .visual-card img { width: 60%; filter: drop-shadow(0 0 20px var(--neon-c)); }
         
-        /* تأثير ملء الشاشة (Overlay) */
+        /* الأوفرلاي */
         .fullscreen-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(3, 11, 17, 0.98);
             backdrop-filter: blur(15px);
             z-index: 2000;
-            display: none; /* مخفي افتراضياً */
+            display: none;
             justify-content: center;
             align-items: center;
             padding: 40px;
@@ -81,25 +101,13 @@
             max-height: 90vh;
             overflow-y: auto;
             text-align: center;
-            position: relative;
         }
-
-        .overlay-content img {
-            width: 150px; margin-bottom: 30px;
-            filter: drop-shadow(0 0 20px var(--neon-g));
-        }
-
-        .overlay-content h2 { font-size: 3rem; color: var(--neon-g); margin-bottom: 20px; }
-        .overlay-content div { font-size: 1.4rem; color: #fff; line-height: 1.8; }
-        .overlay-content ul { list-style: none; padding: 0; }
-        .overlay-content li { margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
 
         .close-btn {
             position: absolute; top: 30px; left: 30px;
             font-size: 2rem; color: #fff; cursor: pointer;
             background: var(--neon-c); width: 50px; height: 50px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            z-index: 2100;
         }
 
         @keyframes fadeIn {
@@ -125,49 +133,52 @@
 
     <div id="overlay" class="fullscreen-overlay">
         <div class="close-btn" onclick="closePopup()">&times;</div>
-        <div class="overlay-content" id="overlay-body">
-            </div>
+        <div class="overlay-content" id="overlay-body"></div>
     </div>
 
     <section class="identity-hero">
         <h1>الأساس الاستراتيجي</h1>
-        <p>نحن نبني العلامات التجارية على قواعد من الابتكار والتميز، اضغط على أي قسم لاستكشاف التفاصيل.</p>
+        <p>نحن نبني العلامات التجارية على قواعد من الابتكار والتميز.</p>
     </section>
 
-    <div class="info-section" onclick="openPopup('رؤيتنا', 'أن تصبح شركة Viralex الرائدة في مجال التسويق الفيروسي والإبداعي في اليمن، ننطلق من يريم لنوصّل العلامات التجارية المحلية إلى العالمية.', 'roya.png')">
+    <div class="info-section">
         <div class="info-text">
             <h2><span class="badge">رؤيتنا</span></h2>
-            <p>أن تصبح شركة <span style="color: #89cf53;">Viralex</span> الرائدة في مجال التسويق الفيروسي...</p>
+            <p>أن تصبح شركة <span style="color: #89cf53;">Viralex</span> الشركة الرائدة في مجال التسويق الفيروسي في اليمن...</p>
+            <button class="btn-details" onclick="openPopup('رؤيتنا', 'أن تصبح شركة Viralex الرائدة في مجال التسويق الفيروسي والإبداعي في اليمن، ننطلق من يريم لنوصّل العلامات التجارية المحلية إلى العالمية.', 'roya.png')">اضغط هنا للتفاصيل</button>
         </div>
         <div class="info-visual">
             <div class="visual-card"><img src="roya.png" alt="Vision"></div>
         </div>
     </div>
 
-    <div class="info-section" onclick="openPopup('رسالتنا', 'نبتكر وننفذ حملات تسويقية فيروسية تعتمد على الإبداع والانتشار السريع، ونمكّن عملاءنا من بناء حضور رقمي قوي يحقق لهم التفاعل والنمو المستدام.', 'mission.png')">
+    <div class="info-section">
         <div class="info-text">
               <h2><span class="badge">رسالتنا</span></h2>
               <p>نبتكر وننفذ حملات تسويقية فيروسية تعتمد على الإبداع والانتشار السريع...</p>
+              <button class="btn-details" onclick="openPopup('رسالتنا', 'نبتكر وننفذ حملات تسويقية فيروسية تعتمد على الإبداع والانتشار السريع، ونمكّن عملاءنا من بناء حضور رقمي قوي يحقق لهم التفاعل والنمو المستدام.', 'mission.png')">اضغط هنا للتفاصيل</button>
         </div>
         <div class="info-visual">
             <div class="visual-card"><img src="mission.png" alt="Mission"></div>
         </div>
     </div>
 
-    <div class="info-section" onclick="openPopup('أهدافنا', '<ul><li>أن نكون الخيار الأول للشركات المحلية في مديرية يريم</li><li>تنفيذ 10 حملات فيروسية ناجحة في السنة الأولى</li><li>بناء شبكة من 20 مؤثراً محلياً</li><li>التوسع إلى المحافظات (إب – صنعاء – تعز)</li><li>تحقيق سمعة كشركة مبتكرة وموثوقة</li></ul>', 'goal.png')">
+    <div class="info-section">
         <div class="info-text">
             <h2><span class="badge">أهدافنا</span></h2>
             <p>خارطة الطريق لتحقيق التوسع والتميز في السوق اليمني...</p>
+            <button class="btn-details" onclick="openPopup('أهدافنا', '<ul><li>أن نكون الخيار الأول للشركات المحلية في مديرية يريم</li><li>تنفيذ 10 حملات فيروسية ناجحة في السنة الأولى</li><li>بناء شبكة من 20 مؤثراً محلياً</li><li>التوسع إلى المحافظات (إب – صنعاء – تعز)</li><li>تحقيق سمعة كشركة مبتكرة وموثوقة</li></ul>', 'goal.png')">اضغط هنا للتفاصيل</button>
         </div>
         <div class="info-visual">
             <div class="visual-card"><img src="goal.png" alt="Goal"></div>
         </div>
     </div>
 
-    <div class="info-section" onclick="openPopup('استراتيجيتنا', '<ul><li>التركيز على المحتوى الفيروسي المبتكر</li><li>الاعتماد على المنصات الرقمية الكبرى</li><li>التعاون الاستراتيجي مع المؤثرين</li><li>تقديم باقة خدمات متنوعة وشاملة</li><li>التحليل والتطوير المستمر للأداء</li></ul>', 'stra.png')">
+    <div class="info-section">
         <div class="info-text">
             <h2><span class="badge">استراتيجيتنا</span></h2>
             <p>منهجية Viralex الخاصة لتحويل العلامات التجارية إلى طاقة عابرة للحدود...</p>
+            <button class="btn-details" onclick="openPopup('استراتيجيتنا', '<ul><li>التركيز على المحتوى الفيروسي المبتكر</li><li>الاعتماد على المنصات الرقمية الكبرى</li><li>التعاون الاستراتيجي مع المؤثرين</li><li>تقديم باقة خدمات متنوعة وشاملة</li><li>التحليل والتطوير المستمر للأداء</li></ul>', 'stra.png')">اضغط هنا للتفاصيل</button>
         </div>
         <div class="info-visual">
             <div class="visual-card"><img src="stra.png" alt="Strategy"></div>
@@ -194,21 +205,20 @@
             const body = document.getElementById('overlay-body');
             
             body.innerHTML = `
-                <img src="${imgSrc}" alt="">
-                <h2>${title}</h2>
-                <div>${content}</div>
+                <img src="${imgSrc}" style="width:150px; margin-bottom:30px; filter: drop-shadow(0 0 20px var(--neon-g));" alt="">
+                <h2 style="font-size: 3rem; color: var(--neon-g); margin-bottom: 20px;">${title}</h2>
+                <div style="font-size: 1.4rem; color: #fff; line-height: 1.8;">${content}</div>
             `;
             
             overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // منع التمرير في الخلفية
+            document.body.style.overflow = 'hidden';
         }
 
         function closePopup() {
             document.getElementById('overlay').style.display = 'none';
-            document.body.style.overflow = 'auto'; // إعادة التمرير
+            document.body.style.overflow = 'auto';
         }
 
-        // إغلاق عند الضغط خارج المحتوى
         window.onclick = function(event) {
             const overlay = document.getElementById('overlay');
             if (event.target == overlay) {
